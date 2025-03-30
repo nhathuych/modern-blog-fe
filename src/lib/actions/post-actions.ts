@@ -1,6 +1,6 @@
 'use server'
 import { fetchGraphQL } from "../fetch-graphql"
-import { GET_POSTS } from "../gqlQueries"
+import { GET_POST_BY_ID, GET_POSTS } from "../gqlQueries"
 import { print } from 'graphql'
 import { Post } from "../types/model-types.d"
 import { transformTakeSkip } from "../pagy"
@@ -15,4 +15,9 @@ export const fetchPosts = async ({ page, pageSize }: { page?: number, pageSize?:
     posts: data.posts as Post[],
     totalPosts: data.postCount as number,
   }
+}
+
+export const fetchPostById = async (id: number) => {
+  const data = await fetchGraphQL(print(GET_POST_BY_ID), { id })
+  return data.findPostById as Post
 }
