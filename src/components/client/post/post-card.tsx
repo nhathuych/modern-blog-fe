@@ -10,7 +10,13 @@ const PostCard = (props: Props) => {
   return (
     <div className='flex flex-col bg-white shadow-md rounded-lg overflow-hidden'>
       <div className='relative h-60'>
-        <Image src={thumbnail ?? '/no-img-available.svg'} alt={title ?? ''} priority fill />
+        <Image
+          src={thumbnail ?? '/no-img-available.svg'}
+          alt={title ?? ''}
+          priority
+          fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+        />
       </div>
 
       <div className='flex flex-col flex-grow p-6'>
@@ -18,7 +24,7 @@ const PostCard = (props: Props) => {
         <p className='mt-4 text-gray-700 break-words'>{content?.slice(0, 100)}...</p>
         <p className='mt-2 text-gray-500 text-sm'>{new Date(createdAt ?? '').toLocaleString()}</p>
         <Link
-          href={`/blog/${slug}/${id}`}
+          href={`/post/${slug}/${id}`}
           className='block mt-auto text-indigo-600 text-right hover:underline'
         >
           Read more
