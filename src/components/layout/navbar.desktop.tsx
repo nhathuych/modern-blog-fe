@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { PropsWithChildren, useEffect, useState } from 'react'
 
 type Props = PropsWithChildren
-const DesktopNavbar = (props: Props) => {
+const NavbarDesktop = (props: Props) => {
   const [scrollPosition, setScrollPosition] = useState(0)
 
   const handleScroll = () => {
@@ -29,4 +29,4 @@ const DesktopNavbar = (props: Props) => {
   )
 }
 
-export default DesktopNavbar
+export default NavbarDesktop

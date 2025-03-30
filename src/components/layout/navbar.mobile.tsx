@@ -1,10 +1,10 @@
 'use client'
 import { PropsWithChildren } from 'react'
-import Sidebar from './ui/sidebar'
 import { Menu } from 'lucide-react'
+import Sidebar from '../ui/sidebar'
 
 type Props = PropsWithChildren
-const MobileNavbar = (props: Props) => {
+const NavbarMobile = (props: Props) => {
 
   return (
     <div className='md:hidden'>
@@ -18,4 +18,4 @@ const MobileNavbar = (props: Props) => {
   )
 }
 
-export default MobileNavbar
+export default NavbarMobile

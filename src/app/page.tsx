@@ -1,4 +1,4 @@
-import Hero from '@/components/hero'
+import Hero from '@/components/layout/hero'
 import Posts from '@/components/client/post/posts';
 import { fetchPosts } from '@/lib/actions/post-actions';
 
