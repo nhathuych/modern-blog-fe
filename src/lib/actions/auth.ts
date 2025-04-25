@@ -8,6 +8,7 @@ import { print } from 'graphql'
 import { redirect } from 'next/navigation';
 import { LoginFormSchema } from "../zodSchema/login-form.schema";
 import { revalidatePath } from "next/cache";
+import { setUserCookie } from "../auth-cookie";
 
 export async function signUp(state: SignUpFormState, formData: FormData): Promise<SignUpFormState> {
   const validatedFields = SignupFormSchema.safeParse(Object.fromEntries(formData.entries()))
@@ -49,6 +50,15 @@ export async function signIn(state: SignUpFormState, formData: FormData): Promis
     data: Object.fromEntries(formData.entries()),
     message: 'Invalid email or password.'
   }
+
+  await setUserCookie({
+    user: {
+      id: data.signIn.id,
+      name: data.signIn.name,
+      avatar: data.signIn.avatar,
+    },
+    accessToken: data.signIn.accessToken
+  })
 
   revalidatePath('/')
   redirect('/')
