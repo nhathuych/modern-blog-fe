@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import SignInForm from './_components/signin-form'
+import { Button } from '@/components/ui/button'
+import { BACKEND_URL } from '@/lib/constants'
 
 const SignInPage = () => {
   return (
@@ -9,6 +11,9 @@ const SignInPage = () => {
       <SignInForm/>
 
       <Link href={'/auth/forgot-password'}>Forgot Your Password?</Link>
+      <Button>
+        <a href={`${BACKEND_URL}/auth/google/login`}>Sign In with Google</a>
+      </Button>
     </div>
   )
 }
