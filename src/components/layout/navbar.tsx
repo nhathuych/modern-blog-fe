@@ -1,6 +1,7 @@
 import { getUserFromCookie } from '@/lib/auth-cookie'
 import Link from 'next/link'
 import AuthLinks from './auth-links'
+import Profile from './profile'
 
 type Props = {}
 
@@ -15,7 +16,7 @@ const Navbar = async (props: Props) => {
         <Link href='#about'>About</Link>
         <Link href='#contact'>Contact</Link>
 
-        { userInfo?.user ? <a href={'/api/auth/signout'}>Sign Out</a> : <AuthLinks /> }
+        { userInfo?.user ? <Profile user={userInfo.user} /> : <AuthLinks /> }
       </div>
     </>
   )
