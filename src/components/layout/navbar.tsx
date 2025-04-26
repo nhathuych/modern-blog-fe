@@ -1,9 +1,12 @@
+import { getUserFromCookie } from '@/lib/auth-cookie'
 import Link from 'next/link'
-import React from 'react'
+import AuthLinks from './auth-links'
 
 type Props = {}
 
-const Navbar = (props: Props) => {
+const Navbar = async (props: Props) => {
+  const userInfo = await getUserFromCookie()
+
   return (
     <>
       <Link href='/' className='p-2 font-bold text-2xl cursor-pointer select-none'>My Modern Blog</Link>
@@ -11,6 +14,8 @@ const Navbar = (props: Props) => {
         <Link href='/'>Blog</Link>
         <Link href='#about'>About</Link>
         <Link href='#contact'>Contact</Link>
+
+        { userInfo?.user ? <a href={'/api/auth/signout'}>Sign Out</a> : <AuthLinks /> }
       </div>
     </>
   )
