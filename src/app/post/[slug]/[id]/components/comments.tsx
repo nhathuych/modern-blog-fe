@@ -7,13 +7,16 @@ import { DEFAULT_PAGE_SIZE } from '@/lib/constants'
 import CommentCard from './comment-card'
 import CommentPagination from './comment-pagination'
 import CommentCardSkeleton from './comment-card-skeleton'
+import { UserInfo } from '@/lib/auth-cookie'
+import AddCommentDialog from './add-comment-dialog'
 
 type Props = {
   postId: number
+  user: UserInfo
 }
-const Comments = ({ postId }: Props) => {
+const Comments = ({ postId, user }: Props) => {
   const [page, setPage] = useState(1)
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['GET_COMMENTS_BY_POST', postId, page],
     queryFn: () => {
       return getCommentsByPost({
@@ -29,6 +32,8 @@ const Comments = ({ postId }: Props) => {
   return (
     <div className='shadow-md mt-3 p-2 rounded-md'>
       <h6 className='my-3 text-slate-700 text-lg'>Comments</h6>
+
+      {!!user && <AddCommentDialog user={user} postId={postId} refetch={refetch} />}
 
       <div className='flex flex-col gap-6 mb-2'>
         {isLoading && Array.from({length: 12}).map((_, index) => <CommentCardSkeleton key={index} />)}

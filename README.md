@@ -6,7 +6,7 @@ A modern blog frontend built with 🚀 **Next.js**, 🎨 **Tailwind CSS**, and �
 npm run dev
 ```
 
-## Initialize ShadCN
+## Initialize ShadCN (for first-time setup)
 ShadCN is used for UI components. To set it up, run:
 ```bash
 npx shadcn-ui@latest init
@@ -18,4 +18,7 @@ npx shadcn@latest add label
 npx shadcn@latest add input
 npx shadcn@latest add avatar
 npx shadcn@latest add skeleton
+npx shadcn@latest add dialog
+npx shadcn@latest add textarea
+npx shadcn@latest add sonner
 ```

@@ -69,3 +69,11 @@ export const GET_COMMENTS_BY_POST = gql`
     getTotalByPost(postId: $postId)
   }
 `
+
+export const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($input: CreateCommentInput!) {
+    createComment(createCommentInput: $input) {
+      id
+    }
+  }
+`

@@ -2,6 +2,7 @@ import { fetchPostById } from '@/lib/actions/post-actions'
 import Image from 'next/image'
 import SanitizedContent from './components/sanitized-content'
 import Comments from './components/comments'
+import { getUserFromCookie, UserInfo } from '@/lib/auth-cookie'
 
 type Props = {
   params: {
@@ -11,6 +12,7 @@ type Props = {
 const PostPage = async ({ params }: Props) => {
   const postId = +(await params).id
   const post = await fetchPostById(postId)
+  const userInfo = await getUserFromCookie()
 
   return (
     <main className='mx-auto mt-16 px-4 py-8 container'>
@@ -32,7 +34,7 @@ const PostPage = async ({ params }: Props) => {
 
       <SanitizedContent content={post.content} />
 
-      <Comments postId={post.id} />
+      <Comments postId={post.id} user={userInfo?.user as UserInfo} />
     </main>
   )
 }
