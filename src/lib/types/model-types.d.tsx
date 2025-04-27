@@ -26,3 +26,12 @@ export type Tag = {
   id: number
   name: string
 }
+
+export type Comment = {
+  id: number
+  content: string
+  user: User
+  post: Post
+  createdAt: Date
+  updatedAt: Date
+}

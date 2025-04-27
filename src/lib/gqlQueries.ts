@@ -52,3 +52,20 @@ export const SIGN_IN_MUTATION = gql`
     }
   }
 `
+
+export const GET_COMMENTS_BY_POST = gql`
+  query getCommentsByPost($postId: Int!, $take: Int, $skip: Int) {
+    getCommentsByPost(postId: $postId, take: $take, skip: $skip) {
+      id
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+    }
+
+    getTotalByPost(postId: $postId)
+  }
+`

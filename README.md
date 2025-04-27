@@ -17,4 +17,5 @@ npx shadcn@latest add button
 npx shadcn@latest add label
 npx shadcn@latest add input
 npx shadcn@latest add avatar
+npx shadcn@latest add skeleton
 ```
