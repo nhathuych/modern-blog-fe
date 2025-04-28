@@ -77,3 +77,23 @@ export const CREATE_COMMENT_MUTATION = gql`
     }
   }
 `
+
+// Optional query name (e.g., PostLikeData); can be anything.
+export const GET_POST_LIKES = gql`
+  query PostLikeData($postId: Int!) {
+    getPostLikes(postId: $postId)
+    isUserLikedPost(postId: $postId)
+  }
+`
+
+export const LIKE_POST_MUTATION = gql`
+  mutation likePost($postId: Int!) {
+    likePost(postId: $postId)
+  }
+`
+
+export const UNLIKE_POST_MUTATION = gql`
+  mutation unlikePost($postId: Int!) {
+    unlikePost(postId: $postId)
+  }
+`

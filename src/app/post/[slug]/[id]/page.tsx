@@ -3,6 +3,7 @@ import Image from 'next/image'
 import SanitizedContent from './components/sanitized-content'
 import Comments from './components/comments'
 import { getUserFromCookie, UserInfo } from '@/lib/auth-cookie'
+import Like from './components/like'
 
 type Props = {
   params: {
@@ -33,6 +34,8 @@ const PostPage = async ({ params }: Props) => {
       </div>
 
       <SanitizedContent content={post.content} />
+
+      <Like postId={post.id} user={userInfo?.user as UserInfo} />
 
       <Comments postId={post.id} user={userInfo?.user as UserInfo} />
     </main>
