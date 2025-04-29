@@ -11,7 +11,7 @@ const PostItem = ({ post }: Props) => {
   return (
     <div className='grid grid-cols-8 bg-white shadow m-2 border rounded-md overflow-hidden text-slate-800 text-center hover:scale-[101%] transition'>
       <div className='relative w-48 h-32'>
-        <Image src={post.thumbnail ?? '/no-img-available.svg'} alt={post.slug} fill />
+        <Image src={post.thumbnail || '/no-img-available.svg'} alt={post.slug} fill />
       </div>
 
       <div className='flex flex-col gap-2 col-span-2 ml-2.5'>

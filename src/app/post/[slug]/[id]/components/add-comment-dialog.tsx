@@ -23,10 +23,12 @@ const AddCommentDialog = (props: Props) => {
   const [state, action] = useActionState(saveComment, undefined)
 
   useEffect(() => {
-    toast(state?.ok ? 'Success' : 'Oops!', {
-      description: state?.message,
-      action: { label: 'Ok', onClick: () => {}, },
-    })
+    if (state?.message) {
+      toast(state?.ok ? 'Success' : 'Oops!', {
+        description: state?.message,
+        action: { label: 'Ok', onClick: () => {}, },
+      })
+    }
 
     if (state?.ok) props.refetch()
   }, [state])

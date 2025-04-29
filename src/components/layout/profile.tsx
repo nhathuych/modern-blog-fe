@@ -27,7 +27,7 @@ const Profile = ({ user }: Props) => {
         </div>
 
         <div className='[&>*>*>:nth-child(1)]:justify-self-end *:items-center *:gap-3 *:grid *:grid-cols-5 [&>*>span]:col-span-4 [&>*:hover]:bg-sky-500 *:my-2 [&>*]:px-3 *:py-2 *:rounded [&>*:hover]:text-white *:transaction'>
-          <Link href='/api/auth/signout'>
+          <Link href='/user/create-post'>
             <SquarePlusIcon className='w-4'/>
             <span>Create new post</span>
           </Link>

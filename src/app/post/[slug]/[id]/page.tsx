@@ -24,7 +24,7 @@ const PostPage = async ({ params }: Props) => {
 
       <div className='relative w-80 h-60'>
         <Image
-          src={post.thumbnail ?? '/no-img-available.svg'}
+          src={post.thumbnail || '/no-img-available.svg'}
           alt='/no-img-available.svg'
           priority
           fill

@@ -24,3 +24,22 @@ export type CreateCommentFormState = {
   ok?: boolean
   open?: boolean
 } | undefined
+
+export type PostFormState = {
+  data?: {
+    title?: string
+    content?: string
+    thumbnail?: File | null
+    published?: boolean
+    tags?: string
+  }
+  errors?: {
+    title?: string[]
+    content?: string[]
+    thumbnail?: string[]
+    published?: string[]
+    tags?: string[]
+  }
+  message?: string
+  ok?: boolean
+} | undefined
