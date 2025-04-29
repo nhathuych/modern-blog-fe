@@ -27,17 +27,17 @@ const Profile = ({ user }: Props) => {
         </div>
 
         <div className='[&>*>*>:nth-child(1)]:justify-self-end *:items-center *:gap-3 *:grid *:grid-cols-5 [&>*>span]:col-span-4 [&>*:hover]:bg-sky-500 *:my-2 [&>*]:px-3 *:py-2 *:rounded [&>*:hover]:text-white *:transaction'>
-          <Link href={'/api/auth/signout'}>
+          <Link href='/api/auth/signout'>
             <SquarePlusIcon className='w-4'/>
             <span>Create new post</span>
           </Link>
 
-          <Link href={'/api/auth/signout'}>
+          <Link href='/user/posts'>
             <ListIcon className='w-4'/>
             <span>View all posts</span>
           </Link>
 
-          <a href={'/api/auth/signout'}>
+          <a href='/api/auth/signout'>
             <LogOut className='w-4'/>
             <span>Sign Out</span>
           </a>
