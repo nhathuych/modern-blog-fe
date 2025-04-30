@@ -27,9 +27,11 @@ export type CreateCommentFormState = {
 
 export type PostFormState = {
   data?: {
+    id?: number
     title?: string
     content?: string
     thumbnail?: File | null
+    previousThumbnailUrl?: string | null
     published?: boolean
     tags?: string
   }

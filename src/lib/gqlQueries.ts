@@ -19,8 +19,9 @@ export const GET_POST_BY_ID = gql`
     findPostById(id: $id) {
       id
       title
-      thumbnail
       content
+      thumbnail
+      published
       createdAt
       user {
         id
@@ -120,6 +121,14 @@ export const GET_USER_POSTS = gql`
 export const CREATE_POST_MUTATION = gql`
   mutation createPost($input: CreatePostInput!) {
     createPost(createPostInput: $input) {
+      id
+    }
+  }
+`
+
+export const UPDATE_POST_MUTATION = gql`
+  mutation updatePost($input: UpdatePostInput!) {
+    updatePost(updatePostInput: $input) {
       id
     }
   }

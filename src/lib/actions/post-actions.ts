@@ -1,6 +1,6 @@
 'use server'
 import { fetchGraphQL, fetchGraphQLWithAuth } from "../fetch-graphql"
-import { CREATE_POST_MUTATION, GET_POST_BY_ID, GET_POSTS, GET_USER_POSTS } from "../gqlQueries"
+import { CREATE_POST_MUTATION, GET_POST_BY_ID, GET_POSTS, GET_USER_POSTS, UPDATE_POST_MUTATION } from "../gqlQueries"
 import { print } from 'graphql'
 import { Post } from "../types/model-types.d"
 import { transformTakeSkip } from "../pagy"
@@ -59,5 +59,31 @@ export const savePost = async (state: PostFormState, formData: FormData): Promis
   return {
     data: Object.fromEntries(formData.entries()),
     message: 'Failed to create post.'
+  }
+}
+
+export const updatePost = async (state: PostFormState, formData: FormData): Promise<PostFormState> => {
+  const validatedFields = PostFormSchema.safeParse(Object.fromEntries(formData.entries()))
+
+  if (!validatedFields.success) return {
+    data: Object.fromEntries(formData.entries()),
+    errors: validatedFields.error.flatten().fieldErrors,
+  }
+
+  let thumbnailUrl = ''
+  const { thumbnail, ...inputs } = validatedFields.data
+  if (thumbnail && thumbnail.size !== 0) thumbnailUrl = await uploadThumbnail(thumbnail)
+
+  const data = await fetchGraphQLWithAuth(print(UPDATE_POST_MUTATION), {
+    input: {
+      ...inputs,
+      ...(thumbnailUrl && { thumbnail: thumbnailUrl }),
+    },
+  })
+
+  if (data) return { message: 'Post updated successfully.', ok: true }
+  return {
+    data: Object.fromEntries(formData.entries()),
+    message: 'Failed to update post.'
   }
 }

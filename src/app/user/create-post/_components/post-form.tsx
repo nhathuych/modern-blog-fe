@@ -29,6 +29,8 @@ const PostForm = ({ state, action }: Props) => {
 
   return (
     <form action={action} className='flex flex-col gap-4 [&>div>label]:text-slate-600'>
+      <input name='id' defaultValue={state?.data?.id} hidden />
+
       <div className='flex flex-col gap-1'>
         <Label htmlFor='title'>Title</Label>
         <Input name='title' defaultValue={state?.data?.title} placeholder='Enter the title of the post' />
@@ -52,7 +54,7 @@ const PostForm = ({ state, action }: Props) => {
           }}
         />
         {!!state?.errors?.thumbnail && <p className='text-red-600'>{state.errors.thumbnail}</p>}
-        {!!imageUrl && <Image src={imageUrl} alt='Thumbnail' width={200} height={150} />}
+        {(!!imageUrl || !!state?.data?.previousThumbnailUrl) && <Image src={imageUrl || state?.data?.previousThumbnailUrl || ''} alt='Thumbnail' width={200} height={150} />}
       </div>
 
       <div className='flex flex-col gap-1'>

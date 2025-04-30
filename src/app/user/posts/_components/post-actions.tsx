@@ -9,7 +9,7 @@ const PostActions = ({ postId }: Props) => {
   return (
     <div className='flex justify-center items-center gap-3'>
       <Link
-        href={`/user/post/${postId}/edit`}
+        href={`/user/posts/${postId}/update`}
         title='Edit Post'
         className='p-2 border border-yellow-500 hover:border-yellow-700 rounded-md text-yellow-500 hover:text-yellow-700 transition-colors'
       >
@@ -17,7 +17,7 @@ const PostActions = ({ postId }: Props) => {
       </Link>
 
       <Link
-        href={`/user/post/${postId}/delete`}
+        href={`/user/posts/${postId}/delete`}
         title='Delete Post'
         className='p-2 border border-red-500 hover:border-red-700 rounded-md text-red-500 hover:text-red-700 transition-colors'
       >
