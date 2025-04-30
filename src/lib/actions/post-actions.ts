@@ -6,6 +6,7 @@ import { Post } from "../types/model-types.d"
 import { transformTakeSkip } from "../pagy"
 import { PostFormState } from "../types/form-state"
 import { PostFormSchema } from "../zodSchema/post-form.schema"
+import { uploadThumbnail } from "../upload-files"
 
 export const fetchPosts = async ({ page, pageSize }: { page?: number, pageSize?: number }) => {
   const { skip, take } = transformTakeSkip({ page, pageSize })
@@ -42,7 +43,10 @@ export const savePost = async (state: PostFormState, formData: FormData): Promis
     errors: validatedFields.error.flatten().fieldErrors,
   }
 
-  const thumbnailUrl = ''
+  let thumbnailUrl = ''
+  if (validatedFields.data.thumbnail) {
+    thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail)
+  }
 
   const data = await fetchGraphQLWithAuth(print(CREATE_POST_MUTATION), {
     input: {

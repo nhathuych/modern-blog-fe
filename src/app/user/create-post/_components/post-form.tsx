@@ -5,7 +5,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { PostFormState } from '@/lib/types/form-state'
+import { ArrowLeftIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
@@ -66,6 +68,11 @@ const PostForm = ({ state, action }: Props) => {
       </div>
 
       <SubmitButton>Save</SubmitButton>
+
+      <Link href='/user/posts' className='flex items-center gap-1 text-indigo-500 hover:text-indigo-600'>
+        <ArrowLeftIcon />
+        <span>Back to posts</span>
+      </Link>
     </form>
   )
 }
