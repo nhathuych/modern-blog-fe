@@ -5,7 +5,7 @@ export const PostFormSchema = z.object({
   title: z.string().min(3).max(100),
   content: z.string().min(10),
   thumbnail: z.instanceof(File).optional(),
-  published: z.string().transform(val => val === 'on'),
+  published: z.string().optional().transform(val => val === 'on'),
   tags: z
     .string()
     .optional()

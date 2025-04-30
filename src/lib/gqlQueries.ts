@@ -133,3 +133,9 @@ export const UPDATE_POST_MUTATION = gql`
     }
   }
 `
+
+export const DELETE_POST_MUTATIOM = gql`
+  mutation deletePost($id: Int!) {
+    deletePost(id: $id)
+  }
+`

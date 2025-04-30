@@ -1,12 +1,13 @@
 'use server'
+
 import { fetchGraphQL, fetchGraphQLWithAuth } from "../fetch-graphql"
-import { CREATE_POST_MUTATION, GET_POST_BY_ID, GET_POSTS, GET_USER_POSTS, UPDATE_POST_MUTATION } from "../gqlQueries"
+import { CREATE_POST_MUTATION, DELETE_POST_MUTATIOM, GET_POST_BY_ID, GET_POSTS, GET_USER_POSTS, UPDATE_POST_MUTATION } from "../gqlQueries"
 import { print } from 'graphql'
 import { Post } from "../types/model-types.d"
 import { transformTakeSkip } from "../pagy"
 import { PostFormState } from "../types/form-state"
 import { PostFormSchema } from "../zodSchema/post-form.schema"
-import { uploadThumbnail } from "../upload-files"
+import { deleteThumbnail, uploadThumbnail } from "../upload-files"
 
 export const fetchPosts = async ({ page, pageSize }: { page?: number, pageSize?: number }) => {
   const { skip, take } = transformTakeSkip({ page, pageSize })
@@ -44,13 +45,14 @@ export const savePost = async (state: PostFormState, formData: FormData): Promis
   }
 
   let thumbnailUrl = ''
-  if (validatedFields.data.thumbnail) {
-    thumbnailUrl = await uploadThumbnail(validatedFields.data.thumbnail)
+  const { id, ...attrs } = validatedFields.data
+  if (attrs.thumbnail?.size) {
+    thumbnailUrl = await uploadThumbnail(attrs.thumbnail)
   }
 
   const data = await fetchGraphQLWithAuth(print(CREATE_POST_MUTATION), {
     input: {
-      ...validatedFields.data,
+      ...attrs,
       thumbnail: thumbnailUrl,
     },
   })
@@ -86,4 +88,14 @@ export const updatePost = async (state: PostFormState, formData: FormData): Prom
     data: Object.fromEntries(formData.entries()),
     message: 'Failed to update post.'
   }
+}
+
+export const deletePost = async (post: Post) => {
+  const data = await fetchGraphQLWithAuth(print(DELETE_POST_MUTATIOM), { id: post.id })
+
+  let fileName = null
+  if (post.thumbnail) fileName = post.thumbnail?.split(`/object/public/${process.env.SUPABASE_BUCKET_NAME}/`)[1]
+  if (data.deletePost && fileName) deleteThumbnail(fileName)
+
+  return data.deletePost
 }

@@ -21,4 +21,5 @@ npx shadcn@latest add skeleton
 npx shadcn@latest add dialog
 npx shadcn@latest add textarea
 npx shadcn@latest add sonner
+npx shadcn@latest add card
 ```

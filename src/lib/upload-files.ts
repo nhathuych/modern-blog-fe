@@ -20,3 +20,14 @@ export const uploadThumbnail = async (image: File) => {
 
   return result.data.publicUrl
 }
+
+export const deleteThumbnail = async (fileName: string) => {
+  const supabaseUrl = process.env.SUPABASE_PROJECT_URL!
+  const supabaseKey = process.env.SUPABASE_API_KEY!
+  const bucketName = process.env.SUPABASE_BUCKET_NAME!
+
+  const supabase = createClient(supabaseUrl, supabaseKey)
+  const { error } = await supabase.storage.from(bucketName).remove([fileName])
+
+  return !error
+}
